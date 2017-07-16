@@ -1,0 +1,19 @@
+<template name="signatures">
+    {{#each signatures}}
+        <p>
+            <b>{{name}}</b>
+            {{#if country}}
+                - {{country}}
+            {{/if}}
+            {{#if info}}
+                - {{info}}
+            {{/if}}
+            {{#if comments}}
+                <div class="comments">
+                    {{comments}}
+                </div>
+            {{/if}}
+        </p>
+        <hr>
+    {{/each}}
+</template>

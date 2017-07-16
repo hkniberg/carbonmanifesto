@@ -1,0 +1,31 @@
+<template name="manifesto">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+
+            <p>{{#markdown}}<i>{{background}}</i>{{/markdown}}</p>
+
+            <div class="whiteBackground">
+                <h1>{{header}}</h1>
+                <p>{{pledge}}</p>
+                <ul>
+                    <li>{{bullet1}}</li>
+                    <li>{{bullet2}}</li>
+                    <li>{{bullet3}}</li>
+                </ul>
+                <p>* {{footnote}}</p>
+
+                {{> signIt}}
+            </div>
+
+
+            <h2>Signatories</h2>
+
+            {{> signatures}}
+
+
+        </div>
+    </div>
+
+
+</template>

@@ -1,0 +1,90 @@
+<template name="signIt">
+
+    {{#if signatureReceived}}
+        <div class="alert alert-success">OK, you've signed it! Congrats!</div>
+    {{/if}}
+
+    {{#unless signatureReceived}}
+        {{#unless editing}}
+            <button class="btn btn-lg btn-success showForm">Sign it!</button>
+        {{/unless}}
+    {{/unless}}
+
+    {{#if editing}}
+        <h2>Sign the manifesto</h2>
+            <div class="well">
+                <form>
+                    <div class="row">
+                        <div class="col col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col col-sm-6">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select class="form-control" name="country" id="country">
+                                    <option value="">(select one)</option>
+                                    {{#each countries}}
+                                        <option value="{{name}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="info">About you (optional)</label>
+                        <input type="text" class="form-control" id="info" placeholder="Organization, role, or anything else you want to share">
+                    </div>
+
+                    <label>Do you want to join the mailing list?</label>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="yesNoSlider">
+                                <input id="joinMailingList"  type="checkbox" checked value="">
+                                <label for="joinMailingList"></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            {{#if joinMailingList}}
+                                <input type="email" class="form-control" id="email" aria-describedby="nameHelp" placeholder="Email address">
+                            {{/if}}
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">No spam! Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
+
+                    <div class="form-group">
+                        <label for="comments">Comments (optional)</label>
+                        <textarea rows="5" class="form-control" id="comments" placeholder=""></textarea>
+                    </div>
+
+                    {{#if nameMissing}}
+                        <div class="alert alert-danger">Please write your name.</div>
+                    {{/if}}
+                    {{#if emailMissing}}
+                        <div class="alert alert-danger">Since you want to be on the mailing list, I need your email address.</div>
+                    {{/if}}
+                    {{#if somethingWentWrongVar}}
+                        <div class="alert alert-danger">
+                            Oops. This is embarrassing. Something went wrong! Definitely not your fault.
+                            If you know how, please check the browser console and email the error message to info@everytoncounts.org.
+                            Thanks!
+                        </div>
+                    {{/if}}
+
+                </form>
+                <button class="submitForm btn btn-primary">Sign it!</button>
+                <button class="cancelForm btn btn-default">Never mind</button>
+            </div>
+
+
+
+
+    {{/if}}
+
+</template>
