@@ -11,7 +11,7 @@
     {{/unless}}
 
     {{#if editing}}
-        <h2>Sign the manifesto</h2>
+        <h2>Sign it</h2>
             <div class="well">
                 <form>
                     <div class="row">
@@ -56,7 +56,7 @@
                             {{/if}}
                         </div>
                     </div>
-                    <small class="form-text text-muted">No spam! Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
+                    <small class="form-text text-muted">Dont worry, we won't spam you. Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
 
                     <div class="form-group">
                         <label for="comments">Comments (optional)</label>
@@ -78,8 +78,13 @@
                     {{/if}}
 
                 </form>
-                <button class="submitForm btn btn-primary">Sign it!</button>
-                <button class="cancelForm btn btn-default">Never mind</button>
+                <div>
+                <button class="submitForm btn btn-lg btn-success">Sign it!</button>
+                <button class="cancelForm btn btn-link">No, skip this.</button>
+                </div>
+
+                <small class="form-text text-muted">Note - any spam or trolling or offtopic posts will be removed.</small>
+
             </div>
 
 
