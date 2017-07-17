@@ -1,16 +1,15 @@
 <template name="signIt">
 
-    {{#if signatureReceived}}
-        <div class="alert alert-success">OK, you've signed it! Congrats!</div>
+
+    {{#if showSignItButton}}
+        <button class="btn btn-lg btn-success showForm">Sign it!</button>
     {{/if}}
 
-    {{#unless signatureReceived}}
-        {{#unless editing}}
-            <button class="btn btn-lg btn-success showForm">Sign it!</button>
-        {{/unless}}
-    {{/unless}}
+    {{#if hasSigned}}
+        <div class="alert alert-success">Congrats, you've signed the manifesto!</div>
+    {{/if}}
 
-    {{#if editing}}
+    {{#if showSignatureForm}}
         <h2>Sign it</h2>
             <div class="well">
                 <form>
@@ -41,28 +40,11 @@
                         <input type="text" class="form-control" id="info" placeholder="Organization, role, or anything else you want to share">
                     </div>
 
-                    <label>Do you want to join the mailing list?</label>
-
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="yesNoSlider">
-                                <input id="joinMailingList"  type="checkbox" checked value="">
-                                <label for="joinMailingList"></label>
-                            </div>
-                        </div>
-                        <div class="col-sm-9">
-                            {{#if joinMailingList}}
-                                <input type="email" class="form-control" id="email" aria-describedby="nameHelp" placeholder="Email address">
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{#if joinMailingList}}
-                        <small class="form-text text-muted">Dont worry, we won't spam you. Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
-                    {{/if}}
-
                     <div class="form-group">
                         <label for="comments">Comments (optional)</label>
                         <textarea rows="5" class="form-control" id="comments" placeholder=""></textarea>
+                        <small class="form-text text-muted">Your post will be listed below (without email address). Any off-topic posts will be removed.</small>
+
                     </div>
 
                     {{#if nameMissing}}
@@ -81,17 +63,47 @@
 
                 </form>
                 <div>
-                <button class="submitForm btn btn-lg btn-success">Sign it!</button>
-                <button class="cancelForm btn btn-link">No, skip this.</button>
+                <button class="signButton btn btn-lg btn-success">Sign it!</button>
+                <button class="cancelButton btn btn-link">No, close this form.</button>
                 </div>
 
-                <small class="form-text text-muted">Your post will be listed below (without email address). Any off-topic posts will be removed.</small>
 
             </div>
 
+    {{/if}}
 
+    {{#if showEmailForm}}
+        <div class="well">
+            <form>
+                <label>Do you want to join the mailing list?</label>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" aria-describedby="nameHelp" placeholder="Email address">
+                    <div class="small form-text text-muted">
+                        Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction.
+                        We won't spam you or share your email with anyone.
+                    </div>
+                    {{#if emailMissing}}
+                        <div class="alert alert-danger">We'll need your email address.</div>
+                    {{/if}}
+                </div>
 
+            </form>
+            <div>
+                <button class="joinMailingListButton btn btn-lg btn-success">Yes please</button>
+                <button class="cancelButton btn btn-lg btn-default">No thanks</button>
+            </div>
+
+        </div>
 
     {{/if}}
 
-</template>
+    {{#if somethingWentWrong}}
+        <div class="alert alert-danger">
+            Oops. This is embarrassing. Something went wrong! Definitely not your fault.
+            If you know how, please check the browser console and email the error message to info@everytoncounts.org.
+            Thanks!
+        </div>
+    {{/if}}
+
+
+    </template>

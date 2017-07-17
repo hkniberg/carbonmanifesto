@@ -1,19 +1,20 @@
 <template name="signatures">
     {{#each signatures}}
-        <p class="small">
-            <b>{{name}}</b>
-            {{#if country}}
-                - {{country}}
-            {{/if}}
-            {{#if info}}
-                - {{info}}
-            {{/if}}
-            {{#if comments}}
-                <div class="comments">
-                    {{comments}}
-                </div>
-            {{/if}}
-        </p>
         <hr>
+        <div class="signature">
+            <div class="nameAndCountry">
+                <b>{{name}}</b>
+                {{#if country}}
+                    - {{country}}
+                {{/if}}
+            </div>
+            {{#if info}}
+                <div class="info">{{info}}</div>
+            {{/if}}
+
+            {{#if comments}}
+                <div class="comments">{{comments}}</div>
+            {{/if}}
+        </div>
     {{/each}}
 </template>

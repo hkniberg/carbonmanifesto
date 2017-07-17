@@ -18,8 +18,28 @@ body {
     padding: 10px;
 }
 
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-color: darkgray;
+}
+
 h1 {
     padding-top: 0px;
+}
+
+.signature .nameAndCountry {
+    font-size: 16px;
+}
+
+.signature .info {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.signature .comments {
+    font-size: 14px;
+    white-space: pre-wrap;
 }
 
 
