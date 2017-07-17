@@ -35,6 +35,8 @@ Template.signIt.events({
 
   "change #joinMailingList"() {
     joinMailingListVar.set(isJoinMailingListChecked())
+    nameMissingVar.set(false)
+    emailMissingVar.set(false)
   },
   
   "click .submitForm"() {

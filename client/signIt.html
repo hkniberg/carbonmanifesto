@@ -56,7 +56,9 @@
                             {{/if}}
                         </div>
                     </div>
-                    <small class="form-text text-muted">Dont worry, we won't spam you. Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
+                    {{#if joinMailingList}}
+                        <small class="form-text text-muted">Dont worry, we won't spam you. Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction. Your email will never be shared.</small>
+                    {{/if}}
 
                     <div class="form-group">
                         <label for="comments">Comments (optional)</label>
@@ -83,7 +85,7 @@
                 <button class="cancelForm btn btn-link">No, skip this.</button>
                 </div>
 
-                <small class="form-text text-muted">Note - any spam or trolling or offtopic posts will be removed.</small>
+                <small class="form-text text-muted">Your post will be listed below (without email address). Any off-topic posts will be removed.</small>
 
             </div>
 
