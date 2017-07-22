@@ -1,20 +1,33 @@
 <template name="signatures">
-    {{#each signatures}}
-        <hr>
-        <div class="signature">
-            <div class="nameAndCountry">
-                <b>{{name}}</b>
-                {{#if country}}
-                    - {{country}}
+
+
+    <h2>Latest signatories</h2>
+    <p>
+        <span class="badge">{{signatures.count}}</span> signatories in total
+    </p>
+
+    {{#transition in="zoomIn" out="bounceOut"}}
+        {{#each signatures}}
+            <hr>
+            <div class="signature animated out" >
+                <div class="date">{{formatDate date}}</div>
+                <div class="nameAndCountry">
+                    <b>{{name}}</b>
+                    {{#if countryName}}
+                        - {{countryName}}
+                    {{/if}}
+                    {{#if countryCode}}
+                        <span class="flag-icon flag-icon-{{countryCodeLowerCase}}"></span>
+                    {{/if}}
+                </div>
+                {{#if info}}
+                    <div class="info">{{info}}</div>
+                {{/if}}
+
+                {{#if comments}}
+                    <div class="comments">{{comments}}</div>
                 {{/if}}
             </div>
-            {{#if info}}
-                <div class="info">{{info}}</div>
-            {{/if}}
-
-            {{#if comments}}
-                <div class="comments">{{comments}}</div>
-            {{/if}}
-        </div>
-    {{/each}}
+        {{/each}}
+    {{/transition}}
 </template>

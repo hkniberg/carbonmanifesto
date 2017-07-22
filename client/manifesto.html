@@ -7,17 +7,16 @@
                 <h1>{{header}}</h1>
                 <p>{{pledge}}</p>
                 <ul>
-                    <li>{{bullet1}}</li>
-                    <li>{{bullet2}}</li>
-                    <li>{{bullet3}}</li>
+                    <li>{{#markdown}}{{bullet1}}{{/markdown}}</li>
+                    <li>{{#markdown}}{{bullet2}}{{/markdown}}</li>
+                    <li>{{#markdown}}{{bullet3}}{{/markdown}}</li>
                 </ul>
                 <p class="small">{{#markdown}}\* {{footnote}}{{/markdown}}</p>
 
                 {{> signIt}}
             </div>
+            <p class="translate"><a target="translate" href="https://docs.google.com/forms/d/e/1FAIpQLSfeHxTFnF1DDLg3gQOYQWFEnjMHtXBGn2Mgnt1gvlYNZodBPw/viewform">Offer to translate this manifesto</a></p>
 
-
-            <h2>Signatories</h2>
 
             {{> signatures}}
 

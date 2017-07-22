@@ -18,6 +18,14 @@ body {
     padding: 10px;
 }
 
+.badge {
+    background-color: darkgreen;
+}
+
+.translate {
+    font-size: 14px;
+}
+
 hr {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -26,6 +34,12 @@ hr {
 
 h1 {
     padding-top: 0px;
+}
+
+.signature .date {
+    font-size: 12px;
+    color: #989898;
+
 }
 
 .signature .nameAndCountry {
@@ -41,3 +55,5 @@ h1 {
     font-size: 14px;
     white-space: pre-wrap;
 }
+
+

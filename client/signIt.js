@@ -1,3 +1,5 @@
+import {countries} from "./data/countries"
+
 const showSignatureFormVar = new ReactiveVar(false)
 const showEmailFormVar = new ReactiveVar(false)
 const joinMailingListVar = new ReactiveVar(true)
@@ -5,6 +7,7 @@ const nameMissingVar = new ReactiveVar(false)
 const emailMissingVar = new ReactiveVar(false)
 const somethingWentWrongVar = new ReactiveVar(false)
 const signatureIdVar = new ReactiveVar(null)
+
 
 Template.signIt.helpers({
   showSignatureForm() {
@@ -30,6 +33,9 @@ Template.signIt.helpers({
   },
   hasSigned() {
     return signatureIdVar.get()
+  },
+  countries() {
+    return countries
   }
 })
 
@@ -62,14 +68,26 @@ function submitSignatureForm() {
     nameMissingVar.set(true)
     return
   }
+
   
+
   const signature = {
     name: name,
     languageCode: "en",
-    country: getFormValue("country"),
     info: getFormValue("info"),
     comments: getFormValue("comments")
   }
+  
+  const countryCode = getFormValue("country")
+  if (countryCode) {
+    signature.countryCode = countryCode
+    signature.countryName = getCountryName(countryCode)
+  }
+  
+  
+
+  console.log("signature", signature)
+
 
   Meteor.call("sign", signature, function(err, signatureId) {
     if (err) {
@@ -118,3 +136,9 @@ function getFormValue(name) {
   }
 }
 
+function getCountryName(countryCode) {
+  return $("#country option[value='" + countryCode + "']").text()
+}
+
+function getFormText(name) {
+}

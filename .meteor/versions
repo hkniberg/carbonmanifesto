@@ -16,8 +16,7 @@ caching-html-compiler@1.1.2
 callback-hook@1.0.10
 cfs:http-methods@0.0.32
 check@1.2.5
-chipcastle:countries@1.0.2
-coffeescript@1.0.17
+§coffeescript@1.0.17
 ddp@1.3.0
 ddp-client@2.0.0
 ddp-common@1.2.9
@@ -48,6 +47,7 @@ iron:middleware-stack@1.1.0
 iron:router@1.1.2
 iron:url@1.1.0
 jquery@1.11.10
+jss:flag-icon@0.7.3
 launch-screen@1.1.1
 livedata@1.0.18
 logging@1.1.17
@@ -95,3 +95,4 @@ underscore@1.0.10
 url@1.1.0
 webapp@1.3.17
 webapp-hashing@1.0.9
+webtempest:animate@0.1.9

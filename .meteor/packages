@@ -24,5 +24,6 @@ iron:router
 aldeed:simple-schema
 aldeed:collection2
 markdown
-chipcastle:countries
 fortawesome:fontawesome
+webtempest:animate
+jss:flag-icon
