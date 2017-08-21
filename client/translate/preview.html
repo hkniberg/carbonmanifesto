@@ -1,0 +1,17 @@
+<template name="preview">
+    <div class="well">
+        <h3>Translation preview</h3>
+        <p>This is how your translation to {{preview.languageName}} looks.</p>
+        <div>
+            {{#if admin}}
+                <button class="approveButton btn btn-danger">Approve</button>
+                <button class="editButton btn btn-default">Edit</button>
+            {{else}}
+                <button class="submitButton btn btn-success">Looks great! I'm done!</button>
+                <button class="editButton btn btn-default">No, I want to edit the text</button>
+            {{/if}}
+        </div>
+    </div>
+
+    {{> manifesto}}
+</template>

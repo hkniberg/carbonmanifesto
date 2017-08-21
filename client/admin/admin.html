@@ -1,0 +1,21 @@
+<template name="admin">
+    <h1>Admin</h1>
+
+    {{> loginButtons}}
+
+    {{#if admin}}
+        <div>
+            {{#if pending.count}}
+                <h3>Translations waiting for approval</h3>
+                <div>
+                    {{#each pending}}
+                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                    {{/each}}
+                </div>
+            {{else}}
+                No translations waiting for approval
+            {{/if}}
+        </div>
+    {{/if}}
+
+</template>

@@ -1,0 +1,42 @@
+<template name="translate">
+    <h1>Translate the carbon manifesto</h1>
+    <p>
+        Thanks for helping out!
+        Which language would you like to translate to?
+    </p>
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="well well-sm">
+
+                <h3>To Do</h3>
+                <div>
+                    {{#each todo}}
+                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-4">
+            <div class="well well-sm">
+                <h3>Waiting for approval</h3>
+                <div>
+                    {{#each pending}}
+                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                    {{/each}}
+                </div>
+            </div>
+
+        </div>
+        <div class="col col-sm-4">
+            <div class="well well-sm">
+                <h3>Published</h3>
+                <div>
+                    {{#each published}}
+                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

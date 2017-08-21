@@ -34,6 +34,7 @@ hr {
 
 h1 {
     padding-top: 0px;
+    margin-top: 0px;
 }
 
 .signature .date {
@@ -56,4 +57,16 @@ h1 {
     white-space: pre-wrap;
 }
 
+.languageSelector {
+    font-size: 12px;
+}
+
+.translationTextArea {
+    width: 100%;
+    height: 100%;
+}
+
+.translationText {
+    font-size: 12px;
+}
 

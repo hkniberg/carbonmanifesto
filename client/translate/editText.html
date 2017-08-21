@@ -1,0 +1,83 @@
+<!--
+    Data context should be the language code
+-->
+
+<template name="editText">
+    <h2>Translate to {{languageName}}</h2>
+
+    <p>OK go ahead and translate each section of text below.
+    You can use the google translation for reference.</p>
+
+    <!--
+    <table style="table-layout: fixed;">
+        <tr>
+            <th><b>English original</b></th>
+            <th><b>Your translation</b></th>
+            <th><b>Google translation</b></th>
+        </tr>
+
+
+        {{#each textKeys}}
+            <tr>
+                <td width="30%">
+                    <div class="well well-sm">
+                        {{englishText}}
+                    </div>
+                </td>
+                <td width="40%" height="100%">
+                    <div style="background-color: red; display: inline-block; height: 100%;">
+                        Yeah
+                        <textarea class="translationTextArea" data-textkey="{{this}}">{{translation}}</textarea>
+                    </div>
+                </td>
+                <td width="20%">
+                    {{#if googleTranslation}}
+                        <div class="well well-sm">{{googleTranslation}}</div>
+                    {{else}}
+                        <img src="/images/spinner.gif" width="24" height="24">
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+    -->
+
+    <div class="row">
+        <div class="col col-xs-4">
+        </div>
+        <div class="col col-xs-4">
+            <b>Your translation</b>
+        </div>
+        <div class="col col-xs-4">
+            <b>Google translation</b>
+        </div>
+    </div>
+
+    {{#each textKeys}}
+        <div class="row translationText">
+            <div class="col col-xs-4">
+                <div class="well well-sm">
+                    {{englishText}}
+                </div>
+            </div>
+            <div class="col col-xs-4">
+                <div><textarea rows="{{rows}}" class="translationTextArea" data-textkey="{{this}}">{{translation}}</textarea></div>
+            </div>
+            <div class="col col-xs-4">
+                {{#if googleTranslation}}
+                    <div class="well well-sm">{{googleTranslation}}</div>
+                {{else}}
+                    <img src="/images/spinner.gif" width="24" height="24">
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+
+    {{#if admin}}
+        <button class="previewButton btn btn-lg btn-success">Preview</button>
+        <button class="approveButton btn btn-lg btn-danger">Approve</button>
+    {{else}}
+        <button class="previewButton btn btn-lg btn-success">Preview your translation</button>
+    {{/if}}
+
+</template>

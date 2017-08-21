@@ -1,0 +1,9 @@
+<template name="languageSelector">
+    <select class="languageSelector">
+        {{#each languages}}
+            <option value="{{languageCode}}" {{selected}}>{{languageName}}</option>
+        {{/each}}
+    </select>
+    <button class="translate btn btn-link">Help translate</button>
+
+</template>

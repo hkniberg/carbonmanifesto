@@ -1,17 +1,20 @@
 <template name="manifesto">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <p class="small">{{#markdown}}<i>{{background}}</i>{{/markdown}}</p>
+            <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
 
             <div class="whiteBackground">
-                <h1>{{header}}</h1>
-                <p>{{pledge}}</p>
+                {{#unless preview}}
+                    {{> languageSelector}}
+                {{/unless}}
+                <h1>{{text.header}}</h1>
+                <p>{{text.pledge}}</p>
                 <ul>
-                    <li>{{#markdown}}{{bullet1}}{{/markdown}}</li>
-                    <li>{{#markdown}}{{bullet2}}{{/markdown}}</li>
-                    <li>{{#markdown}}{{bullet3}}{{/markdown}}</li>
+                    <li>{{#markdown}}{{text.bullet1}}{{/markdown}}</li>
+                    <li>{{#markdown}}{{text.bullet2}}{{/markdown}}</li>
+                    <li>{{#markdown}}{{text.bullet3}}{{/markdown}}</li>
                 </ul>
-                <p class="small">{{#markdown}}\* {{footnote}}{{/markdown}}</p>
+                <p class="small">{{#markdown}}\* {{text.footnote}}{{/markdown}}</p>
 
                 {{> signIt}}
             </div>

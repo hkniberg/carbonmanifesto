@@ -18,6 +18,9 @@
   "homepage": "https://github.com/hkniberg/carbonmanifesto#readme",
   "dependencies": {
     "babel-runtime": "^6.23.0",
+    "bcrypt": "^1.0.2",
+    "google-translate": "^2.0.5",
+    "meteor-node-stubs": "^0.2.11",
     "simpl-schema": "^0.3.1"
   }
 }

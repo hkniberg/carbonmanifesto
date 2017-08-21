@@ -1,7 +1,5 @@
 import {Texts} from "../lib/collection"
 
-
-
 Meteor.startup(function() {
 
   if (!Texts.findOne()) {
@@ -18,3 +16,5 @@ Meteor.startup(function() {
     })
   }
 })
+
+

@@ -7,6 +7,10 @@
 <template name="layout">
     <body>
         <div class="outerWrapper">
+            {{#if admin}}
+                {{> loginButtons}}
+            {{/if}}
+
             <div class="container-fluid">
                 {{> yield}}
             </div>
