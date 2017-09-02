@@ -4,6 +4,13 @@
             <option value="{{languageCode}}" {{selected}}>{{languageName}}</option>
         {{/each}}
     </select>
-    <button class="translate btn btn-link">Help translate</button>
+    <button class="translateButton btn btn-link">Help translate</button>
+    {{#if admin}}
+        {{#if pendingTranslationCount}}
+            <button class="adminButton btn btn-link">
+                Approve translations <span class="badge">{{pendingTranslationCount}}</span>
+            </button>
+        {{/if}}
+    {{/if}}
 
 </template>

@@ -20,18 +20,25 @@ Template.languageSelector.helpers({
     if (givenLanguageCode == currentLanguageCode) {
       return "selected"
     }
+  },
+
+  pendingTranslationCount() {
+    return Texts.find({status: 'pending'}).count()
   }
 })
 
 Template.languageSelector.events({
   "change .languageSelector"() {
     const languageCode = $(".languageSelector").val()
-    setCurrentLanguageCode(languageCode)
+    Router.go('/' + languageCode)
   },
 
-  "click .translate"() {
+  "click .translateButton"() {
     Router.go("/translate")
-  }
+  },
 
+  "click .adminButton"() {
+    Router.go("/admin")
+  }
 
 })

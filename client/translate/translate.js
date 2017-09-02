@@ -7,9 +7,19 @@ Template.translate.helpers({
       return !language.status
     })
   },
+  started() {
+    return getLanguages().filter(function(language) {
+      return language.status == 'started'
+    })
+  },
   pending() {
     return getLanguages().filter(function(language) {
       return language.status == 'pending'
+    })
+  },
+  published() {
+    return getLanguages().filter(function(language) {
+      return language.status == 'published'
     })
   }
 })
@@ -32,7 +42,12 @@ Template.translate.events({
   "click .languageButton"(event) {
     const button = event.target
     const languageCode = $(button).data("languagecode")
-    Router.go('/editText/' + languageCode)
+    const texts = Texts.findOne({languageCode: languageCode})
+    if (texts && texts.status == 'published') {
+      Router.go('/' + languageCode)
+    } else {
+      Router.go('/' + languageCode + '/editText')
+    }
   }
 })
 

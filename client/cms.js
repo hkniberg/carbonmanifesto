@@ -6,25 +6,13 @@ const defaultLanguageCode = "en"
 
 
 export function getTexts() {
-  const preview = Session.get("preview")
-
-  if (preview) {
-    if (preview.languageCode == defaultLanguageCode) {
-      return preview
-    } else {
-      return Object.assign(getEnglishTexts(), preview)
-    }
-
+  const languageCode = getCurrentLanguageCode()
+  const texts = Texts.findOne({languageCode: languageCode})
+  if (languageCode == defaultLanguageCode) {
+    return texts
   } else {
-    const languageCode = getCurrentLanguageCode()
-    const texts = Texts.findOne({languageCode: languageCode})
-    if (languageCode == defaultLanguageCode) {
-      return texts
-    } else {
-      return Object.assign(getEnglishTexts(), texts)
-    }
+    return Object.assign(getEnglishTexts(), texts)
   }
-
 }
 
 export function getEnglishTexts() {
@@ -37,30 +25,14 @@ export function setCurrentLanguageCode(languageCode) {
 }
 
 export function getCurrentLanguageCode() {
-  const languageCode = Session.get("currentLanguageCode")
-  if (!languageCode) {
-    return defaultLanguageCode
-  } else {
+  const languageCode = Router.current().params._languageCode
+  if (languageCode) {
     return languageCode
+  } else {
+    return "en"
   }
 }
 
 export function getCurrentLanguageName() {
-  ISOLanguages.getName(getCurrentLanguageCode())
+  return ISOLanguages.getName(getCurrentLanguageCode())
 }
-
-Template.registerHelper('text', function() {
-  return getTexts()
-})
-Template.registerHelper('preview', function() {
-  return Session.get("preview")
-})
-
-
-Template.registerHelper('currentLanguageCode', function() {
-  return getCurrentLanguageCode()
-})
-
-Template.registerHelper('currentLanguageName', function() {
-  return getCurrentLanguageName()
-})

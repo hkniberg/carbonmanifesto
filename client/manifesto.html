@@ -1,10 +1,15 @@
 <template name="manifesto">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            {{#if isPreview}}
+                {{> preview}}
+            {{/if}}
+
             <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
 
             <div class="whiteBackground">
-                {{#unless preview}}
+                {{#unless isPreview}}
                     {{> languageSelector}}
                 {{/unless}}
                 <h1>{{text.header}}</h1>
@@ -18,8 +23,6 @@
 
                 {{> signIt}}
             </div>
-            <p class="translate"><a target="translate" href="https://docs.google.com/forms/d/e/1FAIpQLSfeHxTFnF1DDLg3gQOYQWFEnjMHtXBGn2Mgnt1gvlYNZodBPw/viewform">Offer to translate this manifesto</a></p>
-
 
             {{> signatures}}
 

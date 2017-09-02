@@ -1,16 +1,17 @@
 import {Texts} from "../../lib/collection"
 import {Session} from "meteor/session"
 import {textKeys} from "../../lib/collection"
+import {getCurrentLanguageCode} from "../cms";
+import {getTexts} from "../cms";
 
 
 Template.editText.onRendered(function() {
-  const languageCode = Template.currentData()
+  const languageCode = getCurrentLanguageCode()
+
   const translateFromLanguage = 'en'
   const translateToLanguage = languageCode
 
   textKeys.forEach((textKey) => {
-    console.log("translateFromLanguage", translateFromLanguage)
-    console.log("translateToLanguage", translateToLanguage)
     Meteor.call('googleTranslate', textKey, translateFromLanguage, translateToLanguage, function(err, translatedText) {
       if (err) {
         translatedText = "N/A"
@@ -27,7 +28,7 @@ function getEnglishText(textKey) {
 
 Template.editText.helpers({
   languageName() {
-    const languageCode = this
+    const languageCode = getCurrentLanguageCode()
     return ISOLanguages.getName(languageCode)
   },
 
@@ -46,13 +47,13 @@ Template.editText.helpers({
   
   googleTranslation() {
     const textKey = this
-    const languageCode = Template.parentData()
+    const languageCode = getCurrentLanguageCode()
     return Session.get("googleTranslation-" + textKey + "-en-" + languageCode)
   },
 
   translation() {
     const textKey = this
-    const languageCode = Template.parentData()
+    const languageCode = getCurrentLanguageCode()
     const preview = Session.get("preview")
     if (preview) {
       return preview[textKey]
@@ -66,7 +67,7 @@ Template.editText.helpers({
 })
 
 function getTranslationDoc() {
-  const languageCode = Template.currentData()
+  const languageCode = getCurrentLanguageCode()
 
   const translation = {}
   textKeys.forEach((textKey) => {
@@ -77,44 +78,36 @@ function getTranslationDoc() {
   return translation
 }
 
-function saveTranslation(callback) {
+function saveTranslation(status, thenSurfToRoute) {
   const translation = getTranslationDoc()
-  Meteor.call('saveTranslation', translation, callback)
+  if (status) {
+    translation.status = status
+  }
+  Meteor.call('saveTranslation', translation, function(err) {
+    if (err) {
+      //TODO error handling
+      console.log("An error occurred during saveTranslation", err)
+    } else {
+      Router.go(thenSurfToRoute)
+    }
+
+  })
 }
 
 
 Template.editText.events({
   "click .previewButton"() {
-    saveTranslation(function(err) {
-      Router.go("/preview/" + languageCode)
-    })
+    const languageCode = getCurrentLanguageCode()
+    saveTranslation('started', "/" + languageCode)
   },
 
   "click .reviewButton"() {
-    saveTranslation(function(err) {
-      Router.go("/reviewText/" + languageCode)
-    })
+    const languageCode = getCurrentLanguageCode()
+    Router.go('/' + languageCode + '/reviewText')
   },
 
   "click .approveButton"() {
-    const languageCode = Template.currentData()
-    saveTranslation(function(err) {
-      if (err) {
-        console.log("Failed to save translation", err)
-        return
-      }
-
-      Meteor.call("approveTranslation", languageCode, function(err) {
-        if (err) {
-          console.log("Failed to approve", err)
-          return
-        }
-        Router.go("/admin")
-      })
-      Router.go("/reviewText/" + languageCode)
-    })
+    const languageCode = getCurrentLanguageCode()
+    saveTranslation('published', "/" + languageCode)
   }
-  
-  
-  
 })

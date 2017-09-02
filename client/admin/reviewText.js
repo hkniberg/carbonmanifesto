@@ -2,9 +2,10 @@ import {Texts} from "../../lib/collection"
 import {Session} from "meteor/session"
 
 import {textKeys} from "../../lib/collection"
+import {getCurrentLanguageCode} from "../cms";
 
 Template.reviewText.onRendered(function() {
-  const languageCode = Template.currentData()
+  const languageCode = getCurrentLanguageCode()
 
   const translateFromLanguage = languageCode
   const translateToLanguage = 'en'
@@ -25,11 +26,6 @@ function getEnglishText(textKey) {
 }
 
 Template.reviewText.helpers({
-  languageName() {
-    const languageCode = this
-    return ISOLanguages.getName(languageCode)
-  },
-
   textKeys() {
     return textKeys
   },
@@ -45,13 +41,13 @@ Template.reviewText.helpers({
   
   googleTranslation() {
     const textKey = this
-    const languageCode = Template.parentData()
+    const languageCode = getCurrentLanguageCode()
     return Session.get("googleTranslation-" + textKey + "-" + languageCode + "-en")
   },
 
   translation() {
     const textKey = this
-    const languageCode = Template.parentData()
+    const languageCode = getCurrentLanguageCode()
     const preview = Session.get("preview")
     if (preview) {
       return preview[textKey]
@@ -66,27 +62,17 @@ Template.reviewText.helpers({
 
 Template.reviewText.events({
   "click .previewButton"() {
-
-    const languageCode = Template.currentData()
-    
-    const preview = {}
-    textKeys.forEach((textKey) => {
-      preview[textKey] = $(`[data-textkey=${textKey}]`).val()
-    })
-    preview.languageCode = languageCode
-    preview.languageName = ISOLanguages.getName(languageCode)
-
-    Session.set("preview", preview)
-    Router.go("/preview")
+    const languageCode = getCurrentLanguageCode()
+    Router.go("/" + languageCode)
   },
 
   "click .editButton"() {
-    const languageCode = Template.currentData()
-    Router.go("/editText/" + languageCode)
+    const languageCode = getCurrentLanguageCode()
+    Router.go("/" + languageCode + "/editText")
   },
 
   "click .approveButton"() {
-    const languageCode = Template.currentData()
+    const languageCode = getCurrentLanguageCode()
     Meteor.call("approveTranslation", languageCode, function(err) {
       if (err) {
         console.log("Failed to approve", err)

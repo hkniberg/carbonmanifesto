@@ -5,9 +5,9 @@
         Which language would you like to translate to?
     </p>
     <div class="row">
-        <div class="col col-sm-4">
-            <div class="well well-sm">
 
+        <div class="col col-sm-3">
+            <div class="well well-sm">
                 <h3>To Do</h3>
                 <div>
                     {{#each todo}}
@@ -16,18 +16,35 @@
                 </div>
             </div>
         </div>
-        <div class="col col-sm-4">
-            <div class="well well-sm">
-                <h3>Waiting for approval</h3>
-                <div>
-                    {{#each pending}}
-                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
-                    {{/each}}
+
+        {{#if started}}
+            <div class="col col-sm-3">
+                <div class="well well-sm">
+                    <h3>In progress</h3>
+                    <div>
+                        {{#each started}}
+                            <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                        {{/each}}
+                    </div>
+                </div>
+
+            </div>
+        {{/if}}
+
+        {{#if pending}}
+            <div class="col col-sm-3">
+                <div class="well well-sm">
+                    <h3>Waiting for approval</h3>
+                    <div>
+                        {{#each pending}}
+                            <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
+        {{/if}}
 
-        </div>
-        <div class="col col-sm-4">
+        <div class="col col-sm-3">
             <div class="well well-sm">
                 <h3>Published</h3>
                 <div>
