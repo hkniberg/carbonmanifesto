@@ -1,16 +1,15 @@
 import {Texts} from "../../lib/collection"
 import {Session} from "meteor/session"
+
 import {textKeys} from "../../lib/collection"
 
-
-Template.editText.onRendered(function() {
+Template.reviewText.onRendered(function() {
   const languageCode = Template.currentData()
-  const translateFromLanguage = 'en'
-  const translateToLanguage = languageCode
 
+  const translateFromLanguage = languageCode
+  const translateToLanguage = 'en'
+  
   textKeys.forEach((textKey) => {
-    console.log("translateFromLanguage", translateFromLanguage)
-    console.log("translateToLanguage", translateToLanguage)
     Meteor.call('googleTranslate', textKey, translateFromLanguage, translateToLanguage, function(err, translatedText) {
       if (err) {
         translatedText = "N/A"
@@ -25,7 +24,7 @@ function getEnglishText(textKey) {
   return text[textKey]
 }
 
-Template.editText.helpers({
+Template.reviewText.helpers({
   languageName() {
     const languageCode = this
     return ISOLanguages.getName(languageCode)
@@ -47,7 +46,7 @@ Template.editText.helpers({
   googleTranslation() {
     const textKey = this
     const languageCode = Template.parentData()
-    return Session.get("googleTranslation-" + textKey + "-en-" + languageCode)
+    return Session.get("googleTranslation-" + textKey + "-" + languageCode + "-en")
   },
 
   translation() {
@@ -65,53 +64,35 @@ Template.editText.helpers({
   }
 })
 
-function getTranslationDoc() {
-  const languageCode = Template.currentData()
-
-  const translation = {}
-  textKeys.forEach((textKey) => {
-    translation[textKey] = $(`[data-textkey=${textKey}]`).val()
-  })
-  translation.languageCode = languageCode
-  translation.languageName = ISOLanguages.getName(languageCode)
-  return translation
-}
-
-function saveTranslation(callback) {
-  const translation = getTranslationDoc()
-  Meteor.call('saveTranslation', translation, callback)
-}
-
-
-Template.editText.events({
+Template.reviewText.events({
   "click .previewButton"() {
-    saveTranslation(function(err) {
-      Router.go("/preview/" + languageCode)
+
+    const languageCode = Template.currentData()
+    
+    const preview = {}
+    textKeys.forEach((textKey) => {
+      preview[textKey] = $(`[data-textkey=${textKey}]`).val()
     })
+    preview.languageCode = languageCode
+    preview.languageName = ISOLanguages.getName(languageCode)
+
+    Session.set("preview", preview)
+    Router.go("/preview")
   },
 
-  "click .reviewButton"() {
-    saveTranslation(function(err) {
-      Router.go("/reviewText/" + languageCode)
-    })
+  "click .editButton"() {
+    const languageCode = Template.currentData()
+    Router.go("/editText/" + languageCode)
   },
 
   "click .approveButton"() {
     const languageCode = Template.currentData()
-    saveTranslation(function(err) {
+    Meteor.call("approveTranslation", languageCode, function(err) {
       if (err) {
-        console.log("Failed to save translation", err)
-        return
-      }
-
-      Meteor.call("approveTranslation", languageCode, function(err) {
-        if (err) {
-          console.log("Failed to approve", err)
-          return
-        }
+        console.log("Failed to approve", err)
+      } else {
         Router.go("/admin")
-      })
-      Router.go("/reviewText/" + languageCode)
+      }
     })
   }
   

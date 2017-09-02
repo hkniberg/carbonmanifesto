@@ -1,0 +1,45 @@
+<!--
+    Data context should be the language code
+-->
+
+<template name="reviewText">
+    <h2>Review translation to {{languageName}}</h2>
+
+    <div class="row">
+        <div class="col col-xs-4">
+            <b>Submitted translation</b>
+        </div>
+        <div class="col col-xs-4">
+            <b>Engish version of this translation</b>
+        </div>
+        <div class="col col-xs-4">
+            <b>Original english version text</b>
+        </div>
+    </div>
+
+    {{#each textKeys}}
+        <div class="row translationText">
+            <div class="col col-xs-4">
+                <div class="well well-sm">
+                    {{translation}}
+                </div>
+            </div>
+            <div class="col col-xs-4">
+                {{#if googleTranslation}}
+                    <div class="well well-sm">{{googleTranslation}}</div>
+                {{else}}
+                    <img src="/images/spinner.gif" width="24" height="24">
+                {{/if}}
+            </div>
+            <div class="col col-xs-4">
+                <div class="well well-sm">
+                    {{englishText}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+    <button class="previewButton btn btn-lg btn-success">Preview</button>
+    <button class="editButton btn btn-lg btn-success">Edit</button>
+    <button class="approveButton btn btn-lg btn-danger">Approve</button>
+</template>
