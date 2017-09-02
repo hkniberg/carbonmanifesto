@@ -31,3 +31,5 @@ bshamblen:iso-languages
 accounts-ui
 accounts-password
 alanning:roles
+ldk:bootstrap-progressbar
+momentjs:moment

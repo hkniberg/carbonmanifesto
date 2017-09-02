@@ -1,9 +1,9 @@
 <template name="signatures">
 
 
-    <h2>Latest signatories</h2>
+    <h2>{{text.latestSignatories}}</h2>
     <p>
-        <span class="badge">{{signatures.count}}</span> signatories in total
+        <span class="badge">{{signatures.count}}</span> {{text.signatoriesInTotal}}
     </p>
 
     {{#transition in="zoomIn" out="bounceOut"}}

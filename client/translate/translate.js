@@ -40,8 +40,7 @@ function getLanguages() {
 
 Template.translate.events({
   "click .languageButton"(event) {
-    const button = event.target
-    const languageCode = $(button).data("languagecode")
+    const languageCode = this.languageCode
     const texts = Texts.findOne({languageCode: languageCode})
     if (texts && texts.status == 'published') {
       Router.go('/' + languageCode)

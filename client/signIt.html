@@ -2,30 +2,30 @@
 
 
     {{#if showSignItButton}}
-        <button class="btn btn-lg btn-success showForm">Sign it!</button>
+        <button class="btn btn-lg btn-success showForm">{{text.signIt}}</button>
     {{/if}}
 
     {{#if hasSigned}}
-        <div class="alert alert-success">Congrats, you've signed the manifesto!</div>
+        <div class="alert alert-success">{{text.youSignedIt}}</div>
     {{/if}}
 
     {{#if showSignatureForm}}
-        <h2>Sign it</h2>
+        <h2>{{text.signIt}}</h2>
             <div class="well">
                 <form>
                     <div class="row">
                         <div class="col col-sm-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="name">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="">
+                                <label class="form-control-label" for="name">{{text.name}}</label>
+                                <input type="text" class="form-control" id="name">
                             </div>
                         </div>
 
                         <div class="col col-sm-6">
                             <div class="form-group">
-                                <label for="country">Country</label>
+                                <label for="country">{{text.country}}</label>
                                 <select class="form-control" name="country" id="country">
-                                    <option value="">(select one)</option>
+                                    <option value="">({{text.selectOne}})</option>
                                     {{#each countries}}
                                         <option value="{{Code}}">{{Name}}</option>
                                     {{/each}}
@@ -36,35 +36,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="info">About you (optional)</label>
-                        <input type="text" class="form-control" id="info" placeholder="Organization, role, or anything else you want to share">
+                        <label for="info">{{text.aboutYou}}</label>
+                        <input type="text" class="form-control" id="info" placeholder="{{text.aboutYouPlaceholder}}">
                     </div>
 
                     <div class="form-group">
-                        <label for="comments">Comments (optional)</label>
+                        <label for="comments">{{text.comments}}</label>
                         <textarea rows="5" class="form-control" id="comments" placeholder=""></textarea>
-                        <small class="form-text text-muted">Your post will be listed below (without email address). Any off-topic posts will be removed.</small>
-
+                        <small class="form-text text-muted">{{text.yourNameWillBeListed}}</small>
                     </div>
 
                     {{#if nameMissing}}
-                        <div class="alert alert-danger">Please write your name. Otherwise it'll be a pretty boring signature...</div>
+                        <div class="alert alert-danger">{{text.pleaseWriteYourName}}</div>
                     {{/if}}
                     {{#if emailMissing}}
-                        <div class="alert alert-danger">Since you want to be on the mailing list, I need your email address.</div>
+                        <div class="alert alert-danger">{{text.pleaseWriteYourEmail}}</div>
                     {{/if}}
                     {{#if somethingWentWrongVar}}
                         <div class="alert alert-danger">
-                            Oops. This is embarrassing. Something went wrong! Definitely not your fault.
-                            If you know how, please check the browser console and email the error message to info@everytoncounts.org.
-                            Thanks!
+                            {{text.somethingWentWrong}}
                         </div>
                     {{/if}}
 
                 </form>
                 <div>
-                <button class="signButton btn btn-lg btn-success">Sign it!</button>
-                <button class="cancelButton btn btn-link">No, close this form.</button>
+                <button class="signButton btn btn-lg btn-success">{{text.signIt}}</button>
+                <button class="cancelButton btn btn-link">{{text.closeForm}}</button>
                 </div>
 
 
@@ -75,22 +72,21 @@
     {{#if showEmailForm}}
         <div class="well">
             <form>
-                <label>Do you want to join the mailing list?</label>
+                <label>{{text.joinMailingList}}</label>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="email" aria-describedby="nameHelp" placeholder="Email address">
+                    <input type="email" class="form-control" id="email" aria-describedby="nameHelp" placeholder="{{text.emailAddress}}">
                     <div class="small form-text text-muted">
-                        Max 1 message per month, and only stuff related to CO<sub>2</sub> reduction.
-                        We won't spam you or share your email with anyone.
+                        {{text.emailAddressInfo}}
                     </div>
                     {{#if emailMissing}}
-                        <div class="alert alert-danger">We'll need your email address.</div>
+                        <div class="alert alert-danger">{{text.pleaseWriteYourEmail}}</div>
                     {{/if}}
                 </div>
 
             </form>
             <div>
-                <button class="joinMailingListButton btn btn-lg btn-success">Yes please</button>
-                <button class="cancelButton btn btn-lg btn-default">No thanks</button>
+                <button class="joinMailingListButton btn btn-lg btn-success">{{text.yesPlease}}</button>
+                <button class="cancelButton btn btn-lg btn-default">{{text.noThanks}}</button>
             </div>
 
         </div>
@@ -99,9 +95,7 @@
 
     {{#if somethingWentWrong}}
         <div class="alert alert-danger">
-            Oops. This is embarrassing. Something went wrong! Definitely not your fault.
-            If you know how, please check the browser console and email the error message to info@everytoncounts.org.
-            Thanks!
+            {{text.somethingWentWrong}}
         </div>
     {{/if}}
 

@@ -3,43 +3,98 @@
 -->
 
 <template name="reviewText">
-    <h2>Review translation to {{currentLanguageName}}</h2>
+    {{#unless admin}}
+        <p>You need to be admin to see this page.</p>
+        {{> loginButtons}}
+    {{else}}
 
-    <div class="row">
-        <div class="col col-xs-4">
-            <b>Submitted translation</b>
-        </div>
-        <div class="col col-xs-4">
-            <b>Engish version of this translation</b>
-        </div>
-        <div class="col col-xs-4">
-            <b>Original english version text</b>
-        </div>
-    </div>
+        <h2>Review translation to {{currentLanguageName}}</h2>
 
-    {{#each textKeys}}
+        {{#if started}}
+            <p>
+                This translation is in progress, and hasn't been submitted
+                for approval yet.
+            </p>
+        {{/if}}
+
+
+        {{#if pending}}
+            <p>
+                This translation has been submitted for approval.
+                Check if it looks OK. If you don't know this language, compare with the
+                google translation to see if it seems reasonable.
+                Scroll down to approve it
+            </p>
+        {{/if}}
+
+        {{#if published}}
+            <p>This translation is already published, but you can scroll down
+            and publish it if you want to edit it.</p>
+        {{/if}}
+
+        <div class="row">
+            <div class="col col-xs-4">
+                <b>Submitted {{currentLanguageName}} translation</b>
+
+            </div>
+            <div class="col col-xs-4">
+                <b>Google translation from {{currentLanguageName}} to English</b>
+            </div>
+            <div class="col col-xs-4">
+                <b>Original english text</b>
+            </div>
+        </div>
+
+        {{#each textKeys}}
+            <div class="row translationText">
+                <div class="col col-xs-4">
+
+                    {{#if translation}}
+
+                        <div class="well well-sm {{borderClass}}" style="margin-bottom: 5px;">
+                            {{translation}}
+                        </div>
+                        {{#if wrongLinkCount}}
+                            <div class="alert alert-danger">{{wrongLinkCount}}</div>
+                        {{/if}}
+                    {{else}}
+                        <div class="alert alert-danger"></div>
+                    {{/if}}
+                </div>
+                <div class="col col-xs-4">
+                    {{#if googleTranslation}}
+                        <div class="well well-sm">{{googleTranslation}}</div>
+                    {{/if}}
+                </div>
+                <div class="col col-xs-4">
+                    <div class="well well-sm">
+                        {{englishText}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
         <div class="row translationText">
-            <div class="col col-xs-4">
-                <div class="well well-sm">
-                    {{translation}}
-                </div>
-            </div>
-            <div class="col col-xs-4">
-                {{#if googleTranslation}}
-                    <div class="well well-sm">{{googleTranslation}}</div>
-                {{else}}
-                    <img src="/images/spinner.gif" width="24" height="24">
-                {{/if}}
-            </div>
-            <div class="col col-xs-4">
-                <div class="well well-sm">
-                    {{englishText}}
-                </div>
-            </div>
-        </div>
-    {{/each}}
 
-    <button class="previewButton btn btn-lg btn-success">Preview</button>
-    <button class="editButton btn btn-lg btn-success">Edit</button>
-    <button class="approveButton btn btn-lg btn-danger">Approve</button>
+            <div class="col col-xs-4">
+                {{#if published}}
+                    <div>
+                        <p>This translation is already published.</p>
+                        <button class="unpublishButton btn btn-lg btn-danger">Unpublish it</button> (so people can edit it)</div>
+                {{else}}
+                    <div>{{> translationProgress}}</div>
+                    <div>
+                        <button class="previewButton btn btn-lg btn-success">Preview</button>
+                        <button class="editButton btn btn-lg btn-success">Edit</button>
+                        <button class="approveButton btn btn-lg btn-danger">Publish</button>
+                    </div>
+                {{/if}}
+
+            </div>
+
+        </div>
+    {{/unless}}
+
+
+
 </template>

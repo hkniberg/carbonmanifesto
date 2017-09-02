@@ -1,4 +1,5 @@
 import {countries} from "./data/countries"
+import {getTexts} from "./cms";
 
 const showSignatureFormVar = new ReactiveVar(false)
 const showEmailFormVar = new ReactiveVar(false)
@@ -8,6 +9,11 @@ const emailMissingVar = new ReactiveVar(false)
 const somethingWentWrongVar = new ReactiveVar(false)
 const signatureIdVar = new ReactiveVar(null)
 
+Template.signIt.onRendered(function() {
+  if (getTexts().status != "published") {
+    showSignatureFormVar.set(true)
+  }
+})
 
 Template.signIt.helpers({
   showSignatureForm() {

@@ -3,6 +3,10 @@ import {Session} from "meteor/session"
 
 import {textKeys} from "../../lib/collection"
 import {getCurrentLanguageCode} from "../cms";
+import {countLinks} from "../../lib/util";
+import {removeLinksFromMarkDown} from "../../lib/util";
+import {isLinkCountIncorrect} from "../cms";
+import {setTranslationStatus} from "../cms";
 
 Template.reviewText.onRendered(function() {
   const languageCode = getCurrentLanguageCode()
@@ -13,7 +17,7 @@ Template.reviewText.onRendered(function() {
   textKeys.forEach((textKey) => {
     Meteor.call('googleTranslate', textKey, translateFromLanguage, translateToLanguage, function(err, translatedText) {
       if (err) {
-        translatedText = "N/A"
+        translatedText = ""
       }
       Session.set("googleTranslation-" + textKey + "-" + translateFromLanguage + "-" + translateToLanguage, translatedText)
     })
@@ -22,7 +26,7 @@ Template.reviewText.onRendered(function() {
 
 function getEnglishText(textKey) {
   const text = Texts.findOne({languageName: "English"})
-  return text[textKey]
+  return removeLinksFromMarkDown(text[textKey])
 }
 
 Template.reviewText.helpers({
@@ -57,6 +61,36 @@ Template.reviewText.helpers({
     if (text) {
       return text[textKey]
     }
+  },
+
+  wrongLinkCount() {
+    const textKey = this
+    const languageCode = getCurrentLanguageCode()
+    const text = Texts.findOne({languageCode: languageCode})
+    if (text && text[textKey]) {
+      const translatedLinkCount = countLinks(text[textKey])
+      const englishText = Texts.findOne({languageCode: 'en'})
+      const originalLinkCount = countLinks(englishText[textKey])
+      if (translatedLinkCount != originalLinkCount) {
+        return "Incorrect link count! The english text has " + originalLinkCount + " links, this translation has " + translatedLinkCount + " links."
+      }
+    }
+  },
+
+
+  borderClass() {
+    const languageCode = getCurrentLanguageCode()
+    const textKey = this
+    const text = Texts.findOne({languageCode: languageCode})
+    if (text && text[textKey]) {
+      if (isLinkCountIncorrect(languageCode, textKey)) {
+        return "invalidTranslation"
+      } else {
+        return "validTranslation"
+      }
+    } else {
+      return "emptyTranslation"
+    }
   }
 })
 
@@ -71,15 +105,14 @@ Template.reviewText.events({
     Router.go("/" + languageCode + "/editText")
   },
 
-  "click .approveButton"() {
+  "click .unpublishButton"() {
     const languageCode = getCurrentLanguageCode()
-    Meteor.call("approveTranslation", languageCode, function(err) {
-      if (err) {
-        console.log("Failed to approve", err)
-      } else {
-        Router.go("/admin")
-      }
-    })
+    setTranslationStatus('started')
+  },
+  
+
+  "click .approveButton"() {
+    setTranslationStatus('published', '/admin')
   }
   
   

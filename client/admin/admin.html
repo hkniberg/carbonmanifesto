@@ -1,11 +1,11 @@
 <template name="admin">
     <h1>Admin</h1>
 
-    <a href="/">Back to the manifesto</a>
-
     {{#unless user}}
         {{> loginButtons}}
     {{/unless}}
+
+    <div><a href="/">Back to the manifesto</a></div>
 
     {{#if admin}}
         <div>
@@ -13,13 +13,28 @@
                 <h3>Translations waiting for approval <span class="badge">{{pending.count}}</span></h3>
                 <div>
                     {{#each pending}}
-                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
+                        <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">
+                            <b>{{languageName}}</b> {{progress}} {{lastUpdated}}
+                        </button>
                     {{/each}}
                 </div>
             {{else}}
                 No translations waiting for approval
             {{/if}}
         </div>
+
+        <div>
+            {{#if started.count}}
+                <h3>Translations in progress <span class="badge">{{started.count}}</span></h3>
+                {{#each started}}
+                    <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">
+                        <b>{{languageName}}</b> {{progress}} {{lastUpdated}}
+                    </button>
+                {{/each}}
+            {{/if}}
+        </div>
+
+
     {{else}}
         {{#if user}}
             <p>You don't have admin privileges. Ask another admin to set that up for you.</p>

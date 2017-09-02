@@ -70,3 +70,17 @@ h1 {
     font-size: 12px;
 }
 
+.validTranslation {
+    border-color: green;
+    border-width: 3px;
+}
+
+.invalidTranslation {
+    border-color: red;
+    border-width: 3px;
+}
+
+.emptyTranslation {
+    border-color: lightgrey;
+    border-width: 3px;
+}

@@ -2,29 +2,35 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            {{#if isPreview}}
-                {{> preview}}
-            {{/if}}
+            {{#unless languageExists}}
+                <p>This is an invalid link. I wonder how you ended up here?</p>
+                Anyway, <a href="/">back to the manifesto.</a>
+            {{else}}
 
-            <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
+                {{#if isPreview}}
+                    {{> preview}}
+                {{/if}}
 
-            <div class="whiteBackground">
-                {{#unless isPreview}}
-                    {{> languageSelector}}
-                {{/unless}}
-                <h1>{{text.header}}</h1>
-                <p>{{text.pledge}}</p>
-                <ul>
-                    <li>{{#markdown}}{{text.bullet1}}{{/markdown}}</li>
-                    <li>{{#markdown}}{{text.bullet2}}{{/markdown}}</li>
-                    <li>{{#markdown}}{{text.bullet3}}{{/markdown}}</li>
-                </ul>
-                <p class="small">{{#markdown}}\* {{text.footnote}}{{/markdown}}</p>
+                <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
 
-                {{> signIt}}
-            </div>
+                <div class="whiteBackground">
+                    {{#unless isPreview}}
+                        {{> languageSelector}}
+                    {{/unless}}
+                    <h1>{{text.header}}</h1>
+                    <p>{{text.pledge}}</p>
+                    <ul>
+                        <li>{{#markdown}}{{text.bullet1}}{{/markdown}}</li>
+                        <li>{{#markdown}}{{text.bullet2}}{{/markdown}}</li>
+                        <li>{{#markdown}}{{text.bullet3}}{{/markdown}}</li>
+                    </ul>
+                    <p class="small">{{#markdown}}\* {{text.footnote}}{{/markdown}}</p>
 
-            {{> signatures}}
+                    {{> signIt}}
+                </div>
+
+                {{> signatures}}
+            {{/unless}}
 
 
         </div>

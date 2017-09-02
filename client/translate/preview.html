@@ -1,14 +1,40 @@
 <template name="preview">
     <div class="well">
         <h3>Translation preview</h3>
-        <p>How does this translation to {{currentLanguageName}} look?</p>
+        <div class="row">
+            <div class="col col-xs-4">{{> translationProgress}}</div>
+        </div>
         <div>
             {{#if admin}}
-                <button class="approveButton btn btn-danger">Great! Approve it!</button>
+                {{#if pending}}
+                    <p>This translation to {{currentLanguageName}} has been submitted for approval.
+                    How does it look?</p>
+                    <button class="approveButton btn btn-danger">Great! Publish it!</button>
+                    <button class="reviewButton btn btn-default">Not sure. Review it.</button>
+                    <button class="editButton btn btn-default">Needs work. Edit the text.</button>
+                {{else}}
+                    <p>This translation to {{currentLanguageName}} is still in progress.</p>
+                    <button class="approveButton btn btn-danger">Publish it anyway!</button>
+                    <button class="reviewButton btn btn-default">Review it.</button>
+                    <button class="editButton btn btn-default">Needs work. Edit the text.</button>
+                {{/if}}
+
             {{else}}
-                <button class="submitButton btn btn-success">Great! Submit it for approval!</button>
+                {{#if fullyTranslated}}
+                    {{#if pending}}
+                        <p>This translation has been submitted and is waiting for approval</p>
+                        <button class="unsubmitButton btn btn-danger">No, wait! It's not ready for approval!</button>
+                    {{else}}
+                        <p>How does this translation to {{currentLanguageName}} look?</p>
+                        <button class="submitButton btn btn-success">Great! Submit it for approval!</button>
+                        <button class="editButton btn btn-default">Needs work. Edit the text.</button>
+                    {{/if}}
+                {{else}}
+                    <p>This translation isn't complete, but here's how it looks so far.</p>
+                    <button class="editButton btn btn-default">Keep translating the rest</button>
+                {{/if}}
+
             {{/if}}
-            <button class="editButton btn btn-default">Needs work. Edit the text.</button>
         </div>
     </div>
 </template>

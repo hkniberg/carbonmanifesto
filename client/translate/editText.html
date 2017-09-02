@@ -5,48 +5,95 @@
 <template name="editText">
     <h2>Translate to {{languageName}}</h2>
 
-    <p>OK go ahead and translate each section of text below.
-    You can use the google translation for reference.</p>
+    {{#if published}}
+        <p>This translation is already published. <a href="/{{currentLanguageCode}}">Check it out here</a>.</p>
+        {{#if admin}}
+            <div><button class="unpublishButton btn btn-danger">Unpublish it</button> (so people can edit it)</div>
+        {{/if}}
 
+    {{else}}
 
-    <div class="row">
-        <div class="col col-xs-4">
-            <b>English text</b>
-        </div>
-        <div class="col col-xs-4">
-            <b>{{currentLanguageName}} translation</b>
-        </div>
-        <div class="col col-xs-4">
-            <b>Google translation</b>
-        </div>
-    </div>
+        <p>OK go ahead and translate each section of text below. Everything is saved automatically.
+            When you're done, scroll down and press Preview.
+        </p>
+        <p>Note that links are marked using braces [like this], so mark those in your translation.</p>
+        <p>You can use the google translation column for reference. If you copy from there
+        the link braces are sometimes lost, so then you need to put them in manually.</p>
 
-    {{#each textKeys}}
+        <div class="row">
+            <div class="col col-xs-4">
+                <b>English text</b>
+            </div>
+            <div class="col col-xs-4">
+                <b>{{currentLanguageName}} translation</b>
+                <div>{{> translationProgress}}</div>
+            </div>
+            <div class="col col-xs-4">
+                <b>Google translation</b> (if available)
+            </div>
+        </div>
+
+        {{#each textKeys}}
+            <div class="row translationText">
+                <div class="col col-xs-4">
+                    <div class="well well-sm">
+                        {{englishText}}
+                    </div>
+                </div>
+                <div class="col col-xs-4">
+                    <div>
+                        <textarea rows="{{rows}}" class="translationTextArea {{borderClass}}" data-textkey="{{this}}" placeholder="Type your translation here...">{{translation}}</textarea>
+                        {{#if wrongLinkCount}}
+                            <div class="alert alert-danger">{{wrongLinkCount}}</div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="col col-xs-4">
+                    {{#if googleTranslation}}
+                        <div class="well well-sm">
+                            {{googleTranslation}}
+                            {{#unless translation}}
+                                <div>
+                                    <button tabindex="-1" class="copyButton btn btn-default btn-sm" data-textkey="{{this}}">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                        Copy
+                                    </button>
+                                </div>
+                            {{/unless}}
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+
         <div class="row translationText">
             <div class="col col-xs-4">
-                <div class="well well-sm">
-                    {{englishText}}
+            </div>
+            <div class="col col-xs-4">
+                <div>{{> translationProgress}}</div>
+                <div>
+                    {{#if admin}}
+                        <button class="previewButton btn btn-lg btn-success">Preview</button>
+                        <button class="reviewButton btn btn-lg btn-success">Review</button>
+                        <button class="approveButton btn btn-lg btn-danger">Publish</button>
+                    {{else}}
+                        {{#if started}}
+                            <button class="previewButton btn btn-lg btn-success">Preview this translation</button>
+                        {{/if}}
+
+                        {{#if pending}}
+                            <button class="previewButton btn btn-lg btn-success">Preview this translation</button>
+                            <button class="unsubmitButton btn btn-lg btn-danger">Unsubmit this translation from approval</button>
+                        {{/if}}
+                    {{/if}}
                 </div>
             </div>
             <div class="col col-xs-4">
-                <div><textarea rows="{{rows}}" class="translationTextArea" data-textkey="{{this}}">{{translation}}</textarea></div>
-            </div>
-            <div class="col col-xs-4">
-                {{#if googleTranslation}}
-                    <div class="well well-sm">{{googleTranslation}}</div>
-                {{else}}
-                    <img src="/images/spinner.gif" width="24" height="24">
-                {{/if}}
             </div>
         </div>
-    {{/each}}
 
-    {{#if admin}}
-        <button class="previewButton btn btn-lg btn-success">Preview</button>
-        <button class="reviewButton btn btn-lg btn-success">Review</button>
-        <button class="approveButton btn btn-lg btn-danger">Approve</button>
-    {{else}}
-        <button class="previewButton btn btn-lg btn-success">Preview your translation</button>
     {{/if}}
+
+
 
 </template>

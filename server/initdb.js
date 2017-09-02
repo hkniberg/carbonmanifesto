@@ -12,7 +12,9 @@ Meteor.startup(function() {
       bullet2: "I realize this alone doesn’t solve the climate problem, ...",
       bullet3: "I make this pledge here, in the open, to increase the likelihood tha...",
       footnote: "This could include any type of action such as...",
-      signTheManifesto: "Sign the manifesto"
+      signIt: "Sign it!",
+      name: "Name",
+      country: "Country"
     })
   }
 })
