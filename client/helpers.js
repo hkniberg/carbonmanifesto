@@ -3,6 +3,7 @@ import {getCurrentLanguageName} from "./cms";
 import {getTexts} from "./cms";
 import {Texts} from "../lib/collection"
 import {isFullyTranslated} from "./cms";
+import {isRightToLeftLanguageCode} from "./data/languages";
 
 Template.registerHelper("admin", function() {
   return Roles.userIsInRole(Meteor.user(), 'admin')
@@ -56,4 +57,10 @@ Template.registerHelper('published', function() {
   return texts && texts.status == 'published'
 })
 
+Template.registerHelper('maybeRightToLeft', function() {
+  const languageCode = getCurrentLanguageCode()
+  if (isRightToLeftLanguageCode(languageCode)) {
+    return "rightToLeft"
+  }
+})
 

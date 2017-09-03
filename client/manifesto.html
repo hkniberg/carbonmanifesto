@@ -11,25 +11,28 @@
                     {{> preview}}
                 {{/if}}
 
-                <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
+                <div class="{{maybeRightToLeft}}">
 
-                <div class="whiteBackground">
-                    {{#unless isPreview}}
-                        {{> languageSelector}}
-                    {{/unless}}
-                    <h1>{{text.header}}</h1>
-                    <p>{{text.pledge}}</p>
-                    <ul>
-                        <li>{{#markdown}}{{text.bullet1}}{{/markdown}}</li>
-                        <li>{{#markdown}}{{text.bullet2}}{{/markdown}}</li>
-                        <li>{{#markdown}}{{text.bullet3}}{{/markdown}}</li>
-                    </ul>
-                    <p class="small">{{#markdown}}\* {{text.footnote}}{{/markdown}}</p>
+                    <p class="small">{{#markdown}}<i>{{text.background}}</i>{{/markdown}}</p>
 
-                    {{> signIt}}
+                    <div class="whiteBackground">
+                        {{#unless isPreview}}
+                            {{> languageSelector}}
+                        {{/unless}}
+                        <h1>{{text.header}}</h1>
+                        <p>{{text.pledge}}</p>
+                        <ul>
+                            <li>{{#markdown}}{{text.bullet1}}{{/markdown}}</li>
+                            <li>{{#markdown}}{{text.bullet2}}{{/markdown}}</li>
+                            <li>{{#markdown}}{{text.bullet3}}{{/markdown}}</li>
+                        </ul>
+                        <p class="small">{{#markdown}}\* {{text.footnote}}{{/markdown}}</p>
+
+                        {{> signIt}}
+                    </div>
+
+                    {{> signatures}}
                 </div>
-
-                {{> signatures}}
             {{/unless}}
 
 

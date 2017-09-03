@@ -90,3 +90,7 @@ h1 {
 h3 .badge {
     font-size: 14px;
 }
+
+.rightToLeft {
+    direction: rtl;
+}

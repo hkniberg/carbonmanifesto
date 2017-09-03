@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col col-xs-4">
-                    <div>
+                    <div class="{{maybeRightToLeft}}">
                         <textarea rows="{{rows}}" class="translationTextArea {{borderClass}}" data-textkey="{{this}}" placeholder="Type your translation here...">{{translation}}</textarea>
                         {{#if wrongLinkCount}}
                             <div class="alert alert-danger">{{wrongLinkCount}}</div>
@@ -51,7 +51,7 @@
                 <div class="col col-xs-4">
                     {{#if googleTranslation}}
                         <div class="well well-sm">
-                            <div class="translationText">{{googleTranslation}}</div>
+                            <div class="translationText {{maybeRightToLeft}}">{{googleTranslation}}</div>
                             {{#unless translation}}
                                 <div>
                                     <button tabindex="-1" class="copyButton btn btn-default btn-sm" data-textkey="{{this}}">
