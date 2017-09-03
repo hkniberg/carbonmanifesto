@@ -136,7 +136,7 @@ Template.editText.events({
     setTranslationStatus('started', "/" + languageCode + "/editText")
   },
 
-  "blur .translationTextArea"() {
+  "blur .translationTextArea"(event) {
     const textArea = event.target
     const textKey = $(textArea).data("textkey")
     const textValue = $(textArea).val()
@@ -144,7 +144,7 @@ Template.editText.events({
     Meteor.call('saveText', languageCode, textKey, textValue)
   },
 
-  "click .copyButton"() {
+  "click .copyButton"(event) {
     const button = event.target
     const textKey = $(button).data("textkey")
     const languageCode = getCurrentLanguageCode()
