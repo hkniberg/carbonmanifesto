@@ -1,5 +1,6 @@
 import {countries} from "./data/countries"
 import {getTexts} from "./cms";
+import {getCurrentLanguageCode} from "./cms";
 
 const showSignatureFormVar = new ReactiveVar(false)
 const showEmailFormVar = new ReactiveVar(false)
@@ -89,8 +90,8 @@ function submitSignatureForm() {
     signature.countryCode = countryCode
     signature.countryName = getCountryName(countryCode)
   }
-  
-  
+
+  signature.languageCode = getCurrentLanguageCode()
 
   console.log("signature", signature)
 
