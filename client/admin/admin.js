@@ -20,7 +20,6 @@ Template.admin.helpers({
     const translatedCount = getTranslatedTextCount(texts.languageCode)
     const totalTextCount = textKeys.length
     return "" + Math.floor((translatedCount / totalTextCount) * 100) + "%"
-    //return "(" + translatedCount + "/" + totalTextCount + ")"
   },
 
   lastUpdated() {
