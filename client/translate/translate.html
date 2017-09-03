@@ -13,7 +13,7 @@
 
         <div class="col col-sm-3">
             <div class="well well-sm">
-                <h3>To Do</h3>
+                <h3>To Do <span class="badge">{{todo.length}}</span></h3>
                 <div>
                     {{#each todo}}
                         <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
@@ -25,7 +25,7 @@
         {{#if started}}
             <div class="col col-sm-3">
                 <div class="well well-sm">
-                    <h3>In progress</h3>
+                    <h3>In progress <span class="badge">{{started.length}}</span></h3>
                     <div>
                         {{#each started}}
                             <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
@@ -39,7 +39,7 @@
         {{#if pending}}
             <div class="col col-sm-3">
                 <div class="well well-sm">
-                    <h3>Waiting for approval</h3>
+                    <h3>Waiting for approval <span class="badge">{{pending.length}}</span></h3>
                     <div>
                         {{#each pending}}
                             <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>
@@ -51,7 +51,7 @@
 
         <div class="col col-sm-3">
             <div class="well well-sm">
-                <h3>Published</h3>
+                <h3>Published <span class="badge">{{published.length}}</span></h3>
                 <div>
                     {{#each published}}
                         <button class="btn languageButton btn-default" data-languagecode="{{languageCode}}">{{languageName}}</button>

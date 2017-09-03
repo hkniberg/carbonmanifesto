@@ -86,3 +86,7 @@ h1 {
     border-color: lightgrey;
     border-width: 3px;
 }
+
+h3 .badge {
+    font-size: 14px;
+}
