@@ -28,8 +28,8 @@
         {{/if}}
 
         {{#if published}}
-            <p>This translation is already published, but you can scroll down
-            and publish it if you want to edit it.</p>
+            <p>This translation is already published. If you want to edit it,
+            scroll down and unpublish it first.</p>
         {{/if}}
 
         <div class="row">
@@ -46,13 +46,13 @@
         </div>
 
         {{#each textKeys}}
-            <div class="row translationText">
+            <div class="row">
                 <div class="col col-xs-4">
 
                     {{#if translation}}
 
                         <div class="well well-sm {{borderClass}}" style="margin-bottom: 5px;">
-                            {{translation}}
+                            <div class="translationText">{{translation}}</div>
                         </div>
                         {{#if wrongLinkCount}}
                             <div class="alert alert-danger">{{wrongLinkCount}}</div>
@@ -63,12 +63,12 @@
                 </div>
                 <div class="col col-xs-4">
                     {{#if googleTranslation}}
-                        <div class="well well-sm">{{googleTranslation}}</div>
+                        <div class="well well-sm"><div class="translationText">{{googleTranslation}}</div></div>
                     {{/if}}
                 </div>
                 <div class="col col-xs-4">
                     <div class="well well-sm">
-                        {{englishText}}
+                        <div class="translationText">{{englishText}}</div>
                     </div>
                 </div>
             </div>

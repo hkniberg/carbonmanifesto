@@ -34,10 +34,10 @@
         </div>
 
         {{#each textKeys}}
-            <div class="row translationText">
+            <div class="row">
                 <div class="col col-xs-4">
                     <div class="well well-sm">
-                        {{englishText}}
+                        <div class="translationText">{{englishText}}</div>
                     </div>
                 </div>
                 <div class="col col-xs-4">
@@ -51,7 +51,7 @@
                 <div class="col col-xs-4">
                     {{#if googleTranslation}}
                         <div class="well well-sm">
-                            {{googleTranslation}}
+                            <div class="translationText">{{googleTranslation}}</div>
                             {{#unless translation}}
                                 <div>
                                     <button tabindex="-1" class="copyButton btn btn-default btn-sm" data-textkey="{{this}}">
