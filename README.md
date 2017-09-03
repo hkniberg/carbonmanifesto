@@ -34,4 +34,8 @@ There are some unit tests. To run them, type `npm test`
 Depends on which hosting provider you use. The deploy.sh script is based on the current
 hosting environment at nodechef.
 
+# Environment variables
+
+* Google translation only works if you set env variable GOOGLE_API_KEY
+* Slack notifications only work if you set env variable SLACK_WEBHOOK_URL
 
