@@ -24,7 +24,8 @@ Template.preview.events({
   },
 
   "click .approveButton"() {
-    setTranslationStatus('published', "/admin")
+    const languageCode = getCurrentLanguageCode()
+    setTranslationStatus('published', "/" + languageCode)
   }
 
 })

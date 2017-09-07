@@ -3,7 +3,7 @@ import {getCurrentLanguageName} from "./cms";
 import {getTexts} from "./cms";
 import {Texts} from "../lib/collection"
 import {isFullyTranslated} from "./cms";
-import {isRightToLeftLanguageCode} from "./data/languages";
+import {isRightToLeftLanguageCode} from "../lib/data/languages";
 
 Template.registerHelper("admin", function() {
   return Roles.userIsInRole(Meteor.user(), 'admin')

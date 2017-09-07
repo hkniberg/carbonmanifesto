@@ -1,5 +1,6 @@
 import {Texts} from "../../lib/collection"
 import {setCurrentLanguage} from "../cms"
+import {getLanguageNamePairs} from "../../lib/data/languages";
 
 Template.translate.helpers({
   todo() {
@@ -25,8 +26,8 @@ Template.translate.helpers({
 })
 
 function getLanguages() {
-  const namePairs = ISOLanguages.getNamePairs()
-  return namePairs.map(function(namePair) {
+  const namePairs = getLanguageNamePairs()
+  const languages = namePairs.map(function(namePair) {
     const languageCode = namePair[0]
     const languageName = namePair[1]
     const texts = Texts.findOne({languageCode: languageCode.toLowerCase()})
@@ -36,6 +37,10 @@ function getLanguages() {
       return {languageCode, languageName}
     }
   })
+  return languages.sort((a, b) => {
+    return a.languageName.localeCompare(b.languageName)
+  })
+
 }
 
 Template.translate.events({

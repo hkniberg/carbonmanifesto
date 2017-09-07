@@ -3,6 +3,7 @@ import {Session} from "meteor/session"
 import {copyLinks} from "../lib/util";
 import {textKeys} from "../lib/collection"
 import {countLinks} from "../lib/util";
+import {getLanguageName} from "../lib/data/languages";
 
 const defaultLanguageCode = "en"
 
@@ -60,7 +61,7 @@ export function getCurrentLanguageCode() {
 }
 
 export function getCurrentLanguageName() {
-  return ISOLanguages.getName(getCurrentLanguageCode())
+  return getLanguageName(getCurrentLanguageCode())
 }
 
 

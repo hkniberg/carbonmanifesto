@@ -1,4 +1,4 @@
-import {countries} from "./data/countries"
+import {countries} from "../lib/data/countries"
 import {getTexts} from "./cms";
 import {getCurrentLanguageCode} from "./cms";
 

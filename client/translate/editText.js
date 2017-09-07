@@ -6,6 +6,7 @@ import {removeLinksFromMarkDown} from "../../lib/util";
 import {countLinks} from "../../lib/util";
 import {isLinkCountIncorrect} from "../cms";
 import {setTranslationStatus} from "../cms";
+import {getLanguageName} from "../../lib/data/languages";
 
 
 Template.editText.onRendered(function() {
@@ -34,7 +35,7 @@ function getEnglishText(textKey) {
 Template.editText.helpers({
   languageName() {
     const languageCode = getCurrentLanguageCode()
-    return ISOLanguages.getName(languageCode)
+    return getLanguageName(languageCode)
   },
 
   textKeys() {
@@ -104,7 +105,7 @@ function getTranslationDoc() {
     translation[textKey] = $(`[data-textkey=${textKey}]`).val()
   })
   translation.languageCode = languageCode
-  translation.languageName = ISOLanguages.getName(languageCode)
+  translation.languageName = getLanguageName(languageCode)
   return translation
 }
 
